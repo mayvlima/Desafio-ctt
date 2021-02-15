@@ -1,1 +1,5 @@
-
+ByteArrayInputStream – Valores são originários de um arranjo de bytes;
+FileInputStream – Bytes com originalidade de um arquivo.
+FilterInputStream – Filtra os dados de um InputStream.
+BufferedInputStream – Faz a leitura de grandes volumes de bytes que armazena em um buffer interno.
+DataInputStream – Permite a leitura de representações binárias dos tipos primitivos de Java.

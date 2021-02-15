@@ -4,16 +4,34 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class ManipuladorArquivo {
-
-	public void escritor(String path, String frase) {
-		try {		
-				File arquivo = new File (path);
-				arquivo.createNewFile();			
+	
+	public ArrayList<String> listaFrases = new ArrayList<String>();
+	public File arquivo;
+	
+	public void criarTxt(String path) throws IOException {
+		this.arquivo = new File (path);
+		
+		if (!this.arquivo.exists()) {
 			
-				FileWriter fw = new FileWriter(arquivo, true);
+			this.arquivo.createNewFile();
+			
+			}else {
+				
+				this.arquivo.delete();
+				this.arquivo.createNewFile();
+				
+			}
+	}
+	
+
+	public void escritor(String frase) {
+		try {													
+			
+				FileWriter fw = new FileWriter(this.arquivo, true);
 				BufferedWriter bw = new BufferedWriter(fw);				
 				
 				bw.write(frase);
@@ -27,18 +45,19 @@ public class ManipuladorArquivo {
         }			
 	}
 	
-	public void leitor(String path) {
+	
+	public void leitor() {
 		try {
 	       
-			File arquivo = new File (path);
-	        FileReader fr = new FileReader(arquivo);
+			FileReader fr = new FileReader(this.arquivo);
 	      
-	        BufferedReader br = new BufferedReader(fr);	       
-	        String linha = "";
-
-	        while ( ( linha = br.readLine() ) != null) {	        
-	        System.out.println(linha);
-	    }			
+	        BufferedReader br = new BufferedReader(fr);       
+	        
+	        while( br.ready() ){				
+				String linha = br.readLine();
+				this.listaFrases.add(linha);				
+				}             
+	        
 	        fr.close();
 	        br.close();
 	        
@@ -46,4 +65,5 @@ public class ManipuladorArquivo {
 	    	e.printStackTrace();
 	    }
 	}
+	
 }
