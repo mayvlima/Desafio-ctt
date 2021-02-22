@@ -11,9 +11,10 @@ public class ManipuladorArquivo {
 	
 	public ArrayList<String> listaFrases = new ArrayList<String>();
 	public File arquivo;
+	public final String PATH = "C:/Users/limav/Desktop/Desafio-ctt/src/texto.txt";
 	
-	public void criarTxt(String path) throws IOException {
-		this.arquivo = new File (path);
+	public void criarTxt() throws IOException {
+		this.arquivo = new File (PATH);
 		
 		if (!this.arquivo.exists()) {
 			
@@ -29,16 +30,10 @@ public class ManipuladorArquivo {
 	
 
 	public void escritor(String frase) {
-		try {													
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(this.arquivo, true))) {
 			
-				FileWriter fw = new FileWriter(this.arquivo, true);
-				BufferedWriter bw = new BufferedWriter(fw);				
-				
 				bw.write(frase);
-				bw.newLine();
-				
-				bw.close();
-				fw.close();
+				bw.newLine();			
 				
 		}catch (IOException e) {
             e.printStackTrace();
@@ -47,19 +42,16 @@ public class ManipuladorArquivo {
 	
 	
 	public void leitor() {
-		try {
+		try(BufferedReader br = new BufferedReader(new FileReader(this.arquivo))) { 	        
 	       
-			FileReader fr = new FileReader(this.arquivo);
-	      
-	        BufferedReader br = new BufferedReader(fr);       
-	        
-	        while( br.ready() ){				
-				String linha = br.readLine();
-				this.listaFrases.add(linha);				
-				}             
-	        
-	        fr.close();
-	        br.close();
+			String linha = br.readLine();
+			//retorna um nulo se não tiver uma linha
+			
+			while(linha != null){
+				System.out.println(linha);				
+				this.listaFrases.add(linha);
+				linha = br.readLine();
+			}
 	        
 		} catch (IOException e) {
 	    	e.printStackTrace();

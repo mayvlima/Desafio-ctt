@@ -5,31 +5,34 @@ public class Principal {
 
 	public static void main(String[] args) throws IOException {
 		ManipuladorArquivo arq = new ManipuladorArquivo();
-		ManipuladorFrases frases = new ManipuladorFrases();
+		ManipuladorFrases frases = new ManipuladorFrases();		
 		
-		String path = "/Users/limav/Desktop/Desafio-ctt/src/texto.txt";
 		
 		int i = 1;
 		
 		Scanner lerString = new Scanner(System.in);
 		Scanner lerInt = new Scanner(System.in);
 		
-		arq.criarTxt(path);
+		arq.criarTxt();
 		
 		do {
 			
-			System.out.println("Qual frase você deseja adicionar?");
+			System.out.println("\nQual frase você deseja adicionar?");
 			String frase = lerString.nextLine();
 			
 			arq.escritor(frase);
 			
-			 System.out.println("Deseja adicionar mais uma frase? Digite: ");
+			 System.out.println("\nDeseja adicionar mais uma frase? Digite: ");
 		     System.out.println("1 - Sim");
 		     System.out.println("2 - Não");
-		     i = lerInt.nextInt();
+		     i = lerInt.nextInt();	     
+		     
 			
 		} while(i != 2);
 		
+		
+		System.out.println("\n______________________________________________\n");		
+		System.out.println("A frases escritas no txt foram: \n");
 		arq.leitor();
 		
 		System.out.println("\n______________________________________________\n");		
